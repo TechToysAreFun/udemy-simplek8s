@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: client-node-port
+spec:
+  # Subtype set as NodePort (NodePort almost always being used in development)
+  type: NodePort
+  # Ports that need to be mapped on the target object (client.pod.yml)
+  ports:
+    # Port that this service can listen on
+    - port: 3050
+      # Matches the port in the client-pod.yml
+      targetPort: 3000
+      # Port that we as devs will use to access from our browser to test the pod
+      nodePort: 31515
+  selector:
+    # This selector is what connects this file to the client-pod.yml file (The name is arbitraty, they just need to match between files)
+    component: web

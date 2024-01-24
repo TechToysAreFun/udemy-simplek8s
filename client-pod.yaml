@@ -1,0 +1,20 @@
+# API v1 exposes us to a certain set of object types
+apiVersion: v1
+# We're making a 'pod' type object
+kind: Pod
+metadata:
+  # With a name of 'client-pod'
+  name: client-pod
+  labels:
+    # That is connected to the client-node-port.yml file (which has it's selector property set to 'component: web')
+    component: web
+# Specifying the container details
+spec:
+  containers:
+    # Who we're naming 'client'
+    - name: client
+      # Based on an existing image on Docker Hub (from the Udemy course)
+      image: stephengrider/multi-client
+      # That will be listening/receiving signals on port 3000
+      ports:
+        - containerPort: 3000
